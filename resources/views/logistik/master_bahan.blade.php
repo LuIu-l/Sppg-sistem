@@ -25,6 +25,12 @@
                         @error('satuan')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
 
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Batas Stok Minimum <span class="text-danger">*</span></label>
+                        <input type="number" step="0.01" name="stok_minimum" class="form-control @error('stok_minimum') is-invalid @enderror" value="{{ old('stok_minimum', 0) }}" required min="0" placeholder="Contoh: 10">
+                        @error('stok_minimum')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                    </div>
+
 
 
                     <div class="d-grid">
@@ -47,6 +53,7 @@
                             <tr>
                                 <th class="ps-4">Nama Bahan</th>
                                 <th>Satuan</th>
+                                <th>Stok Minimum</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +61,7 @@
                             <tr>
                                 <td class="ps-4 fw-semibold">{{ $b->nama_bahan }}</td>
                                 <td>{{ $b->satuan }}</td>
+                                <td>{{ $b->stok_minimum }}</td>
                             </tr>
                             @empty
                             <tr>

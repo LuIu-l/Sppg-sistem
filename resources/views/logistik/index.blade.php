@@ -58,7 +58,7 @@
                                 {{ $stok->stok_aktual }} <span class="fs-6 text-muted fw-normal">{{ $stok->bahanMakanan->satuan ?? '' }}</span>
                             </div>
                         </td>
-                        <td>{{ $stok->stok_minimum }} {{ $stok->bahanMakanan->satuan ?? '' }}</td>
+                        <td>{{ $stok->bahanMakanan->stok_minimum ?? 0 }} {{ $stok->bahanMakanan->satuan ?? '' }}</td>
                         <td>
                             @if($stok->is_kritis)
                                 <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25">Kritis</span>

@@ -178,7 +178,7 @@
                                 <td class="text-center">
                                     <span class="fw-bold text-danger">{{ number_format($stok->stok_aktual, 1) }}</span>
                                 </td>
-                                <td class="text-center text-muted">{{ number_format($stok->stok_minimum, 1) }}</td>
+                                <td class="text-center text-muted">{{ number_format($stok->bahanMakanan->stok_minimum, 1) }}</td>
                                 <td class="text-center">
                                     @if($stok->stok_aktual <= 0)
                                         <span class="badge bg-danger px-3 py-2">HABIS</span>

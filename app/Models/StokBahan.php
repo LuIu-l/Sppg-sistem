@@ -15,7 +15,6 @@ class StokBahan extends Model
         'bahan_makanan_id',
         'menu_gizi_id',
         'stok_aktual',
-        'stok_minimum',
         'kebutuhan_per_porsi',
         'terakhir_diubah',
     ];
@@ -24,7 +23,6 @@ class StokBahan extends Model
     {
         return [
             'stok_aktual'         => 'float',
-            'stok_minimum'        => 'float',
             'kebutuhan_per_porsi' => 'float',
             'terakhir_diubah'     => 'datetime',
         ];
@@ -42,6 +40,6 @@ class StokBahan extends Model
 
     public function getIsKritisAttribute(): bool
     {
-        return $this->stok_aktual <= $this->stok_minimum;
+        return $this->stok_aktual <= ($this->bahanMakanan->stok_minimum ?? 0);
     }
 }

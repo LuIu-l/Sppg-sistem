@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="row g-3 mb-4">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="jumlah_ditambahkan" class="form-label fw-semibold">Jumlah yang Ditambahkan <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input type="number" step="0.01" class="form-control @error('jumlah_ditambahkan') is-invalid @enderror" id="jumlah_ditambahkan" name="jumlah_ditambahkan" value="{{ old('jumlah_ditambahkan') }}" required min="0.01">
@@ -51,12 +51,6 @@
                             @if($stok)
                                 <div class="form-text text-primary mt-2"><i class="bi bi-info-circle me-1"></i> Stok saat ini: <strong>{{ $stok->stok_aktual }}</strong></div>
                             @endif
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="stok_minimum" class="form-label fw-semibold">Batas Stok Minimum (Peringatan)</label>
-                            <input type="number" step="0.01" class="form-control @error('stok_minimum') is-invalid @enderror" id="stok_minimum" name="stok_minimum" value="{{ old('stok_minimum', $stok->stok_minimum ?? 0) }}" min="0">
-                            @error('stok_minimum')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                     </div>
 

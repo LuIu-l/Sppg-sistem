@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
         inputKode.classList.remove('is-valid');
 
         html5QrCode.start(
-            { facingMode: "environment" }
+            { facingMode: "environment" },
             qrConfig,
             onScanSuccess,
             onScanError

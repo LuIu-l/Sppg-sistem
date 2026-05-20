@@ -52,17 +52,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('bahan_makanan')->insert([
-            ['id' => 1, 'nama_bahan' => 'Beras Premium', 'satuan' => 'Kg'],
-            ['id' => 2, 'nama_bahan' => 'Daging Sapi', 'satuan' => 'Kg'],
-            ['id' => 3, 'nama_bahan' => 'wortel', 'satuan' => 'Kg'],
-            ['id' => 4, 'nama_bahan' => 'Susu Kemasan', 'satuan' => 'Kotak'],
+            ['id' => 1, 'nama_bahan' => 'Beras Premium', 'satuan' => 'Kg', 'stok_minimum' => 20],
+            ['id' => 2, 'nama_bahan' => 'Daging Sapi', 'satuan' => 'Kg', 'stok_minimum' => 5],
+            ['id' => 3, 'nama_bahan' => 'wortel', 'satuan' => 'Kg', 'stok_minimum' => 10],
+            ['id' => 4, 'nama_bahan' => 'Susu Kemasan', 'satuan' => 'Kotak', 'stok_minimum' => 50],
         ]);
 
         DB::table('stok_bahan')->insert([
-            ['bahan_makanan_id' => 1, 'stok_aktual' => 150.5, 'stok_minimum' => 20.0],
-            ['bahan_makanan_id' => 2, 'stok_aktual' => 3.5, 'stok_minimum' => 5.0], 
-            ['bahan_makanan_id' => 3, 'stok_aktual' => 50, 'stok_minimum' => 10],
-            ['bahan_makanan_id' => 4, 'stok_aktual' => 200, 'stok_minimum' => 50],
+            ['bahan_makanan_id' => 1, 'stok_aktual' => 150.5],
+            ['bahan_makanan_id' => 2, 'stok_aktual' => 3.5], 
+            ['bahan_makanan_id' => 3, 'stok_aktual' => 50],
+            ['bahan_makanan_id' => 4, 'stok_aktual' => 200],
         ]);
 
         DB::table('menu_gizi')->insert([

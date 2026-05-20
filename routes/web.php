@@ -45,7 +45,10 @@ Route::get('/dashboard', function () {
     if (in_array($role, ['kepala_sppg', 'petugas'])) {
         $data['totalPenerima']      = PenerimaManfaat::count();
         $data['distribusiHariIni']  = Distribusi::whereDate('waktu_distribusi', today())->count();
-        $data['stokKritis']         = StokBahan::whereColumn('stok_aktual', '<=', 'stok_minimum')->count();
+        
+        $data['stokKritis'] = StokBahan::join('bahan_makanan', 'bahan_makanan.id', '=', 'stok_bahan.bahan_makanan_id')
+            ->whereRaw('stok_bahan.stok_aktual <= bahan_makanan.stok_minimum')
+            ->count();
 
         $data['totalPorsiHariIni'] = Distribusi::whereDate('waktu_distribusi', today())
             ->where('status', 'terdistribusi')->count();
@@ -53,7 +56,9 @@ Route::get('/dashboard', function () {
         if ($data['totalPenerimaBelum'] < 0) $data['totalPenerimaBelum'] = 0;
 
         $data['stokKritisList'] = StokBahan::with('bahanMakanan')
-            ->whereColumn('stok_aktual', '<=', 'stok_minimum')
+            ->select('stok_bahan.*')
+            ->join('bahan_makanan', 'bahan_makanan.id', '=', 'stok_bahan.bahan_makanan_id')
+            ->whereRaw('stok_bahan.stok_aktual <= bahan_makanan.stok_minimum')
             ->get();
 
         // START: Log Aktivitas Terbaru — 5 transaksi terakhir (distribusi)

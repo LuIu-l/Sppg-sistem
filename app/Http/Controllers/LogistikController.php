@@ -32,14 +32,16 @@ class LogistikController extends Controller
         if ($redirect) return $redirect;
 
         $stokList = StokBahan::with('bahanMakanan')
-            ->when($request->search, fn($q) => $q->whereHas('bahanMakanan', fn($bq) =>
-                $bq->where('nama_bahan', 'like', '%' . $request->search . '%')
-            ))
-            ->orderByRaw('stok_aktual <= stok_minimum DESC')
-            ->orderBy('stok_aktual', 'asc')
+            ->select('stok_bahan.*', 'bahan_makanan.stok_minimum')
+            ->join('bahan_makanan', 'bahan_makanan.id', '=', 'stok_bahan.bahan_makanan_id')
+            ->when($request->search, fn($q) => $q->where('bahan_makanan.nama_bahan', 'like', '%' . $request->search . '%'))
+            ->orderByRaw('stok_bahan.stok_aktual <= bahan_makanan.stok_minimum DESC')
+            ->orderBy('stok_bahan.stok_aktual', 'asc')
             ->paginate(20);
 
-        $jumlahKritis = StokBahan::whereRaw('stok_aktual <= stok_minimum')->count();
+        $jumlahKritis = StokBahan::join('bahan_makanan', 'bahan_makanan.id', '=', 'stok_bahan.bahan_makanan_id')
+            ->whereRaw('stok_bahan.stok_aktual <= bahan_makanan.stok_minimum')
+            ->count();
 
         return view('logistik.index', compact('stokList', 'jumlahKritis'));
     }
@@ -61,18 +63,16 @@ class LogistikController extends Controller
         $request->validate([
             'bahan_makanan_id'   => 'required|exists:bahan_makanan,id',
             'jumlah_ditambahkan' => 'required|numeric|min:0.01',
-            'stok_minimum'       => 'nullable|numeric|min:0',
             'keterangan'         => 'nullable|string|max:255',
         ]);
 
         $stok = StokBahan::firstOrCreate(
             ['bahan_makanan_id' => $request->bahan_makanan_id],
-            ['stok_aktual' => 0, 'stok_minimum' => $request->stok_minimum ?? 0]
+            ['stok_aktual' => 0]
         );
 
         $stok->update([
             'stok_aktual'     => $stok->stok_aktual + $request->jumlah_ditambahkan,
-            'stok_minimum'    => $request->stok_minimum ?? $stok->stok_minimum,
             'terakhir_diubah' => now(),
         ]);
 
@@ -96,10 +96,11 @@ class LogistikController extends Controller
         $request->validate([
             'nama_bahan'             => 'required|string|max:255|unique:bahan_makanan,nama_bahan',
             'satuan'                 => 'required|string|max:50',
+            'stok_minimum'           => 'required|numeric|min:0',
         ]);
 
         BahanMakanan::create($request->only([
-            'nama_bahan', 'satuan'
+            'nama_bahan', 'satuan', 'stok_minimum'
         ]));
 
         return redirect()->route('logistik.index')->with('success', 'Bahan makanan baru berhasil ditambahkan ke master data.');

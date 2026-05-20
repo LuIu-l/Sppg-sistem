@@ -14,6 +14,7 @@ class BahanMakanan extends Model
     protected $fillable = [
         'nama_bahan',
         'satuan',
+        'stok_minimum',
         'kalori_per_satuan',
         'protein_per_satuan',
         'karbohidrat_per_satuan',
@@ -23,6 +24,7 @@ class BahanMakanan extends Model
     protected function casts(): array
     {
         return [
+            'stok_minimum'           => 'float',
             'kalori_per_satuan'      => 'float',
             'protein_per_satuan'     => 'float',
             'karbohidrat_per_satuan' => 'float',
