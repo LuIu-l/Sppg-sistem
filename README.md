@@ -1,10 +1,8 @@
 # Sistem Informasi Manajemen SPPG (Sekolah Program Pemenuhan Gizi)
 
 <p align="center">
-  <img src="<img width="1408" height="768" alt="Gemini_Generated_Image_30qtxo30qtxo30qt" src="https://github.com/user-attachments/assets/aab51a09-2dde-4ef4-bc47-bd3b0080926e" />
-"/>
+  <img src="https://github.com/user-attachments/assets/aab51a09-2dde-4ef4-bc47-bd3b0080926e" alt="Logo SPPG" width="300" />
 </p>
-
 
 
 ---
