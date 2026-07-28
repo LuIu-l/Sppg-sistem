@@ -316,7 +316,7 @@ Saat konfirmasi distribusi berhasil (UC-04), sistem secara otomatis:
 
 ## 🎨 Panduan Desain UI/UX
 
-Sistem informasi operasional ini didesain untuk terlihat bersih, serius, dan minimalis seperti panel admin profesional, menggunakan pendekatan "Anti-AI Slop" terintegrasi dengan **AdminLTE v4.0.0-rc7**:
+Sistem informasi operasional ini didesain untuk terlihat bersih, serius, dan minimalis seperti panel admin profesional,terintegrasi dengan **AdminLTE v4.0.0-rc7**:
 
 - **Wajib AdminLTE v4 + Bootstrap 5**: Seluruh layouting dan styling HARUS menggunakan kelas utilitas asli AdminLTE 4 dan Bootstrap 5 (contoh: `app-wrapper`, `sidebar-wrapper`, `bg-body-tertiary`) yang dipanggil via CDN.
 - **Eksternal CSS DILARANG**: Modifikasi menggunakan file CSS eksternal sangat dilarang. Penggunaan Tailwind CSS dilarang keras, wajib menggunakan utilitas Bootstrap secara eksklusif.
