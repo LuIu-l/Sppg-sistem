@@ -1,15 +1,11 @@
 # Sistem Informasi Manajemen SPPG (Sekolah Program Pemenuhan Gizi)
 
 <p align="center">
-  <img src="https://laravel.com/img/logotype.min.svg" width="300" alt="Laravel Logo"/>
+  <img src="<img width="1408" height="768" alt="Gemini_Generated_Image_30qtxo30qtxo30qt" src="https://github.com/user-attachments/assets/aab51a09-2dde-4ef4-bc47-bd3b0080926e" />
+"/>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Laravel-11.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel"/>
-  <img src="https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap"/>
-  <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP"/>
-  <img src="https://img.shields.io/badge/Database-MySQL%2FSQLite-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL"/>
-</p>
+
 
 ---
 
