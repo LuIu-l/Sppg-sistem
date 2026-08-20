@@ -17,21 +17,37 @@ putenv('DB_DATABASE=/tmp/database.sqlite');
 require __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../bootstrap/app.php';
 
-// Otomatis buat database dan isi data jika belum ada di sesi Vercel ini (untuk simulasi pameran)
-if (!file_exists('/tmp/database.sqlite')) {
-    touch('/tmp/database.sqlite');
-    
-    // Jalankan migrasi dan seeding secara programmatis
-    $kernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
-    $kernel->call('migrate:fresh', [
-        '--seed' => true,
-        '--force' => true
-    ]);
-}
+try {
+    // Otomatis buat database dan isi data jika belum ada di sesi Vercel ini (untuk simulasi pameran)
+    if (!file_exists('/tmp/database.sqlite')) {
+        touch('/tmp/database.sqlite');
+        
+        $consoleKernel = $app->make(\Illuminate\Contracts\Console\Kernel::class);
+        $consoleKernel->call('migrate:fresh', [
+            '--seed' => true,
+            '--force' => true
+        ]);
+    }
 
-// Lanjutkan request seperti biasa
-$kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
-$request = \Illuminate\Http\Request::capture();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);
+    $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
+    $request = \Illuminate\Http\Request::capture();
+    $response = $kernel->handle($request);
+    
+    // Jika response memiliki exception, kita cetak paksa!
+    if (isset($response->exception) && $response->exception) {
+        echo "<h1>Exception Ditemukan (Bypass)</h1>";
+        echo "<p><strong>Error:</strong> " . $response->exception->getMessage() . "</p>";
+        echo "<p><strong>File:</strong> " . $response->exception->getFile() . ":" . $response->exception->getLine() . "</p>";
+        echo "<pre>" . $response->exception->getTraceAsString() . "</pre>";
+        die();
+    }
+
+    $response->send();
+    $kernel->terminate($request, $response);
+} catch (\Throwable $e) {
+    echo "<h1>Error Fatal (Try Catch)</h1>";
+    echo "<p><strong>Error:</strong> " . $e->getMessage() . "</p>";
+    echo "<p><strong>File:</strong> " . $e->getFile() . ":" . $e->getLine() . "</p>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+    die();
+}
