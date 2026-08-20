@@ -15,8 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $now = Carbon::now();
-        $passwordPegawai = Hash::make('akses123');
-        $pinSiswa = Hash::make('123456');
+        $passwordPegawai = Hash::make('12345');
+        $pinSiswa = Hash::make('12345');
 
         DB::table('peran')->insert([
             ['id' => 1, 'nama_peran' => 'Kepala SPPG'],
@@ -32,17 +32,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('pengguna')->insert([
-            ['id' => 1, 'peran_id' => 1, 'nama' => 'Ibu Siti Maryam', 'username' => 'kepala sppg', 'password' => $passwordPegawai],
+            ['id' => 1, 'peran_id' => 1, 'nama' => 'Ibu Siti Maryam', 'username' => 'kepala_sppg', 'password' => $passwordPegawai],
             
-            ['id' => 2, 'peran_id' => 2, 'nama' => 'Ibu Fitri', 'username' => 'ahligizi', 'password' => $passwordPegawai],
+            ['id' => 2, 'peran_id' => 2, 'nama' => 'Ibu Fitri', 'username' => 'ahli_gizi', 'password' => $passwordPegawai],
             
-            ['id' => 3, 'peran_id' => 3, 'nama' => 'Pak Ramdani', 'username' => 'petugasdaftar', 'password' => $passwordPegawai],
-            
-            ['id' => 4, 'peran_id' => 3, 'nama' => 'Pak Taufik', 'username' => 'petugasgudang', 'password' => $passwordPegawai],
-            
-            ['id' => 5, 'peran_id' => 3, 'nama' => 'Pak ilham', 'username' => 'petugasdistribusi', 'password' => $passwordPegawai],
-            
-
+            ['id' => 3, 'peran_id' => 3, 'nama' => 'Pak Ramdani', 'username' => 'petugas', 'password' => $passwordPegawai],
         ]);
 
         DB::table('penerima_manfaat')->insert([
@@ -118,7 +112,7 @@ class DatabaseSeeder extends Seeder
                 'penerima_manfaat_id' => 1, 
                 'waktu_distribusi' => $now->subHours(2), 
                 'status' => 'terdistribusi',
-                'petugas_id' => 5 
+                'petugas_id' => 3 
             ],
         ]);
     }
