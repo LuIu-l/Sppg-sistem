@@ -13,6 +13,7 @@ putenv('CACHE_STORE=array');
 // Set SQLite database ke folder /tmp agar Vercel bisa menulis
 putenv('DB_CONNECTION=sqlite');
 putenv('DB_DATABASE=/tmp/database.sqlite');
+putenv('APP_KEY=base64:ip7gYKM72XUU/ZNKfB+qxXS3FkJkNlzF0Wkzt8ZHV8g=');
 
 require __DIR__ . '/../vendor/autoload.php';
 $app = require_once __DIR__ . '/../bootstrap/app.php';
