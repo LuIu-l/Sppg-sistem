@@ -1,2 +1,38 @@
 <?php
-echo "<h1>PHP IS WORKING PADA VERCEL</h1>";
+
+// Konfigurasi khusus untuk Vercel
+putenv('APP_CONFIG_CACHE=/tmp/config.php');
+putenv('APP_EVENTS_CACHE=/tmp/events.php');
+putenv('APP_PACKAGES_CACHE=/tmp/packages.php');
+putenv('APP_ROUTES_CACHE=/tmp/routes.php');
+putenv('APP_SERVICES_CACHE=/tmp/services.php');
+putenv('VIEW_COMPILED_PATH=/tmp');
+putenv('SESSION_DRIVER=cookie');
+putenv('CACHE_STORE=array');
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+function debugOutput($msg) {
+    echo "<p>$msg</p>";
+}
+
+try {
+    if (!file_exists(__DIR__ . '/../public/index.php')) {
+        debugOutput("ERROR: public/index.php NOT FOUND! Path: " . __DIR__ . '/../public/index.php');
+        die();
+    }
+    
+    if (!file_exists(__DIR__ . '/../vendor/autoload.php')) {
+        debugOutput("ERROR: vendor/autoload.php NOT FOUND!");
+        die();
+    }
+
+    require __DIR__ . '/../public/index.php';
+} catch (\Throwable $e) {
+    echo "<h1>Fatal Error Terdeteksi</h1>";
+    echo "<p><strong>Message:</strong> " . $e->getMessage() . "</p>";
+    echo "<p><strong>File:</strong> " . $e->getFile() . " (Line: " . $e->getLine() . ")</p>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+}
