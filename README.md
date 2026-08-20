@@ -267,11 +267,11 @@ php artisan serve
 
 | Nama | Peran | Identitas Login | Password/PIN |
 |---|---|---|---|
-| Admin SPPG | Kepala SPPG | `admin` | `password123` |
-| Dr. Gizi | Ahli Gizi | `ahligizi` | `password123` |
-| Budi Santoso | Petugas Pendaftaran | `petugas1` | `password123` |
-| Siti Rahayu | Penerima Manfaat | NIK: `3201010101010001` | `1234` |
-| Ahmad Fauzi | Penerima Manfaat | NISN: `0012345678` | `5678` |
+| Ibu Siti Maryam | Kepala SPPG | `kepala_sppg` | `12345` |
+| Ibu Fitri | Ahli Gizi | `ahli_gizi` | `12345` |
+| Pak Ramdani | Petugas Pendaftaran | `petugas` | `12345` |
+| Siswa SD (Alif) | Penerima Manfaat | NIK: `3204010101000001` | `12345` |
+| Siswa SMP (Alif) | Penerima Manfaat | NISN: `1234567892` | `12345` |
 
 ---
 
