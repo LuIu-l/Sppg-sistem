@@ -17,9 +17,16 @@ try {
     $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
     $response = $kernel->handle($request);
     
-    // Paksa status code jadi 200 agar Vercel tidak membajak halaman errornya!
-    $response->setStatusCode(200);
+    // Jika response memiliki exception, kita cetak paksa!
+    if (isset($response->exception) && $response->exception) {
+        echo "<h1>Exception Ditemukan (Bypass)</h1>";
+        echo "<p><strong>Error:</strong> " . $response->exception->getMessage() . "</p>";
+        echo "<p><strong>File:</strong> " . $response->exception->getFile() . ":" . $response->exception->getLine() . "</p>";
+        echo "<pre>" . $response->exception->getTraceAsString() . "</pre>";
+        die();
+    }
     
+    $response->setStatusCode(200);
     $response->send();
     $kernel->terminate($request, $response);
 } catch (\Throwable $e) {
