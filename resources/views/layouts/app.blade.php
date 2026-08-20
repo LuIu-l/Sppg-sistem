@@ -13,6 +13,7 @@
     <!-- Required Plugin(AdminLTE) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@4.0.0-rc7/dist/css/adminlte.min.css">
     @yield('styles')
+<style>html { scroll-behavior: smooth; }</style>
 </head>
 <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
 <div class="app-wrapper">
