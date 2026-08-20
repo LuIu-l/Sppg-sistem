@@ -9,20 +9,21 @@ putenv('VIEW_COMPILED_PATH=/tmp');
 putenv('SESSION_DRIVER=cookie');
 putenv('CACHE_STORE=array');
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require __DIR__.'/../vendor/autoload.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 try {
-    require __DIR__.'/../vendor/autoload.php';
-    echo "<p>Autoload success.</p>";
+    $request = \Illuminate\Http\Request::capture();
+    $kernel = $app->make(\Illuminate\Contracts\Http\Kernel::class);
+    $response = $kernel->handle($request);
     
-    $app = require_once __DIR__.'/../bootstrap/app.php';
-    echo "<p>Bootstrap success.</p>";
+    // Paksa status code jadi 200 agar Vercel tidak membajak halaman errornya!
+    $response->setStatusCode(200);
     
-    // Jangan panggil handleRequest dulu, kita cek apakah bisa sampai sini
-    echo "<p>App initialized.</p>";
+    $response->send();
+    $kernel->terminate($request, $response);
 } catch (\Throwable $e) {
-    echo "<h1>Exception Terdeteksi</h1>";
-    echo $e->getMessage();
+    echo "<h1>Error Fatal</h1>";
+    echo "<p>" . $e->getMessage() . "</p>";
+    echo "<p>" . $e->getFile() . " : " . $e->getLine() . "</p>";
 }
